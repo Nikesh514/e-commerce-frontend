@@ -1,6 +1,6 @@
 import './login.css'
 
-const Login  = () => {
+const Register  = () => {
     return (
         <main>
             <h1>
@@ -32,3 +32,5 @@ const Login  = () => {
         </main>
     )
 }
+
+export default Register
