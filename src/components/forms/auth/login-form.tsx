@@ -1,73 +1,52 @@
-import type { ILogin } from "../../../types/auth.types"
-import Button from "../../common/button"
-import Input from "../../common/inputs/input"
-import {useForm,FormProvider} from 'react-hook-form'
+import React from "react";
 
 const LoginForm = () => {
-
-    const methods = useForm({
-        defaultValues:{
-            email:'',
-            password:''
-        }
-    })
-
-
-    const onSubmit = (data:ILogin) =>{
-        console.log('form submitted',data)
-    }
-
-
-
   return (
     <div>
-        <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="flex flex-col gap-10 ">
-            <div className="flex flex-col gap-4">
-                    {/* email */}
-                    <Input
-                        id={"email"}
-                        label={"Email"}
-                        name={'email'}
-                        placeholder={'example@gmail.com'}
-                        type={'email'}
-                        rules={{
-                            required:'Email is required'
-                        }}
-                        required
-
-                    />
-
-                    {/* password */}
-                    <Input
-                        id={"password"}
-                        label={"Password"}
-                        name={'password'}
-                        placeholder={'xxxxxxxxxx'}
-                        type={'password'}
-                        rules={{
-                            required:'Password is required',
-                            minLength:6
-                        }}
-                        required
-
-                    />          
-            </div>
-
-            <Button
-        
-                label={"Login"}
-                type="submit"
+      <form className="flex flex-col gap-10">
+        <div className="flex flex-col gap-4">
+          {/* email */}
+          <div className="flex flex-col gap-2">
+            <label
+              className="text-xl font-semibold text-gray-700"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              className="border border-grey-300 rounded-md p-2 placeholder:text-sm text-lg focus:outline-blue-500"
+              placeholder="jondoe@gmail.com"
+              type={"email"}
+              name={"email"}
+              id={"email"}
             />
+          </div>
 
-        </form>
-
-        </FormProvider>
-      
+          {/* password */}
+          <div className="flex flex-col gap-1">
+            <label
+              className="text-xl font-semibold text-gray-700"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              placeholder="********"
+              type={"password"}
+              name={"password"}
+              id={"password"}
+            />
+          </div>
+        </div>
+        <button
+          className="bg-blue-500 w-full p-2 rounded-md text-white test-lg font-semibold hover:bg-blue-600 cursor-pointer transition-all duration-300"
+          type="submit"
+        >
+          Login
+        </button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
-
-
+export default LoginForm;
