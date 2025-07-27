@@ -1,4 +1,5 @@
 import LoginForm from "../../components/forms/auth/login-form"
+import { Link } from "react-router-dom"
 
 const Login = () => {
 
@@ -15,7 +16,7 @@ const Login = () => {
                 </div>
                 <div className="text-center mt-4">
                     <p className="text-gray-600">Forgot your password? <span className="text-blue-500 font-semibold">Reset Password</span></p>
-                    <p>do not have an account? <span className=" text-blue-500 font-semibold ">Sign Up</span></p>
+                    <p>do not have an account? <Link to={'/sign-up'}/> <span className=" text-blue-500 font-semibold ">Sign Up</span></p>
                 </div>
 
             </div>
