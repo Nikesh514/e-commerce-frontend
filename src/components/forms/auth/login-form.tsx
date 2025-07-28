@@ -5,8 +5,13 @@ import Input from "../../common/inputs/input";
 import { useForm, FormProvider } from "react-hook-form";
 import { loginSchema } from "../../../schema/auth.schema";
 import { login } from "../../../api/auth.api";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+
+  const navigate = useNavigate();
+
   const methods = useForm({
     defaultValues: {
       email: "",
@@ -16,10 +21,20 @@ const LoginForm = () => {
     mode: "all",
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      console.log("Login successful", data);
+      navigate('/')
+    },
+    onError: (error) => {
+      console.error("Login failed", error);
+    },
+  });
+
   const onSubmit = async (data: ILogin) => {
     console.log("form submitted", data);
-    const response = await login(data);
-    console.log(response);
+     mutate(data);
   };
 
   return (
@@ -58,7 +73,11 @@ const LoginForm = () => {
             />
           </div>
 
-          <Button label={"Login"} type="submit" />
+          <Button
+            isDisabled={isPending}
+            label={isPending ? "Looging In.." : "Login"}
+            type="submit"
+          />
         </form>
       </FormProvider>
     </div>
