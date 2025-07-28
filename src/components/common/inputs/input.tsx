@@ -50,7 +50,7 @@ const Input: FC<IProps> = ({
           }
                      p-3 rounded-md placeholder:text-lg text-lg `}
           placeholder={placeholder}
-          type={type}
+          type={show && type === "password" ? "text" : type}
           id={id}
         />
         {type === "password" &&
@@ -64,7 +64,7 @@ const Input: FC<IProps> = ({
             <IoMdEyeOff
               onClick={() => setShow(!show)}
               size={22}
-              className="text-gray-600 cursor-pointer absolute right-1 " 
+              className="text-gray-600 cursor-pointer absolute right-1 "
             />
           ))}
       </div>
