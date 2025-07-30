@@ -4,8 +4,14 @@ import Button from "../../common/button";
 import Input from "../../common/inputs/input";
 import { useForm, FormProvider } from "react-hook-form";
 import { registerSchema } from "../../../schema/auth.schema";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../../api/auth.api";
 
 const RegisterForm = () => {
+
+  const navigate = useNavigate()
+
   const methods = useForm({
     defaultValues: {
       first_name: "",
@@ -22,6 +28,17 @@ const RegisterForm = () => {
   const onSubmit = (data: IRegister) => {
     console.log(data);
   };
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: register,
+    onSuccess: (data) => {
+      console.log("Registration successful", data)
+      navigate('/login')
+    },
+    onError: (error) => {
+      console.error("Registration failed", error)
+    }
+  })
 
   return (
     <div>
@@ -83,7 +100,10 @@ const RegisterForm = () => {
             />
           </div>
 
-          <Button label={"Sign Up"} type="submit" />
+          <Button
+          isDisabled={isPending}
+           label={isPending ? "Signing Up...": "Sign Up"}
+           type="submit" />
         </form>
       </FormProvider>
     </div>
