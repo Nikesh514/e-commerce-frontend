@@ -7,6 +7,7 @@ import { registerSchema } from "../../../schema/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../../api/auth.api";
+import toast from "react-hot-toast";
 
 const RegisterForm = () => {
 
@@ -24,21 +25,25 @@ const RegisterForm = () => {
     resolver: yupResolver(registerSchema),
   });
 
-  // submmit handler
-  const onSubmit = (data: IRegister) => {
-    console.log(data);
-  };
 
   const { mutate, isPending } = useMutation({
     mutationFn: register,
-    onSuccess: (data) => {
-      console.log("Registration successful", data)
+    onSuccess: (response) => {
+      console.log(response)
+      toast.success(response.message ?? 'Registration successful')
       navigate('/login')
     },
     onError: (error) => {
-      console.error("Registration failed", error)
+      console.log(error)
+      toast.error(error.message ?? 'Registration filed')
     }
   })
+
+  // submmit handler
+  const onSubmit = (data: IRegister) => {
+    console.log(data);
+    mutate(data)
+  };
 
   return (
     <div>

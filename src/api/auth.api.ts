@@ -13,11 +13,11 @@ export const login = async (data: ILogin) => {
   }
 };
 
-export const register = async (data: IRegister) => {
+export const register = async (data: Omit<IRegister, "confirm_password">) => {
   try {
     const response = await api.post("/auth/register", data)
     return response.data;
   } catch (error: any) {
-    throw error.data;
+    throw error.response.data;
   }
 }
