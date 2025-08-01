@@ -4,15 +4,13 @@ import Button from "../../common/button";
 import Input from "../../common/inputs/input";
 import { useForm, FormProvider } from "react-hook-form";
 import { registerSchema } from "../../../schema/auth.schema";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import { register } from "../../../api/auth.api";
+import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const RegisterForm = () => {
-
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
   const methods = useForm({
     defaultValues: {
       first_name: "",
@@ -23,26 +21,27 @@ const RegisterForm = () => {
       phone: "",
     },
     resolver: yupResolver(registerSchema),
+    mode: "all",
   });
-
 
   const { mutate, isPending } = useMutation({
     mutationFn: register,
     onSuccess: (response) => {
-      console.log(response)
-      toast.success(response.message ?? 'Registration successful')
-      navigate('/login')
+      console.log(response);
+      toast.success(response.message ?? "Register success");
+      navigate("/login");
     },
     onError: (error) => {
-      console.log(error)
-      toast.error(error.message ?? 'Registration filed')
-    }
-  })
+      console.log(error);
+      toast.error(error.message ?? "Registration failed.");
+    },
+  });
 
-  // submmit handler
-  const onSubmit = (data: IRegister) => {
+  // submit handler
+  const onSubmit = async (data: IRegister) => {
     console.log(data);
-    mutate(data)
+    // register(data)
+    mutate(data);
   };
 
   return (
@@ -105,10 +104,7 @@ const RegisterForm = () => {
             />
           </div>
 
-          <Button
-          isDisabled={isPending}
-           label={isPending ? "Signing Up...": "Sign Up"}
-           type="submit" />
+          <Button isDisabled={isPending} label={"Sign Up"} type="submit" />
         </form>
       </FormProvider>
     </div>
