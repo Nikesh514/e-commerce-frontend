@@ -1,4 +1,5 @@
 import NavBar from "../components/header"
+import Hero from "../components/landing/hero"
 
 
 const HomePage = () =>{
@@ -6,7 +7,7 @@ const HomePage = () =>{
     return (
         <main>
             <NavBar/>
-            <h1>Home Page</h1>
+            <Hero/>
         </main>
     )
 
