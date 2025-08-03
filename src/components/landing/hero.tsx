@@ -4,6 +4,7 @@ const Hero = () => {
   return (
     <div id={"hero-section"} className="w-full h-[85vh] relative">
       <img src={heroImage} className="h-full w-full" />
+      {/* hero info */}
       <div className="absolute top-[30%] buttom-1/2 left-230 max-w-[600px]">
         <div>
           <h1 className="text-4xl text-[#CCCCCC] font-bold">
@@ -17,7 +18,9 @@ const Hero = () => {
             and satisfying shopping journey.
           </p>
         </div>
-        <button className="bg-[#A31621] text-[#CCCCCC] py-3 w-[150] rounded-md font-bold text-lg cursor-pointer">Shop Now</button>
+        <button className="bg-[#A31621] border border-[#A31621] text-[#CCCCCC] hover:bg-[#CCCCCC] hover:border[#A31621] hover:text-[#A31621] transition-all duration-300 py-3 w-[150] rounded-md font-bold text-lg cursor-pointer">
+          Shop Now
+        </button>
       </div>
     </div>
   );
