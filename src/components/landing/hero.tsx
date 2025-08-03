@@ -3,6 +3,8 @@ import heroImage from "../../assets/hero-1.webp";
 const Hero = () => {
   return (
     <div id={"hero-section"} className="w-full h-[85vh] relative">
+      {/* overlay */}
+      <div className="bg-balck/40 absolute inset-0"></div>
       <img src={heroImage} className="h-full w-full" />
       {/* hero info */}
       <div className="absolute top-[30%] buttom-1/2 left-230 max-w-[600px]">

@@ -3,13 +3,13 @@ import ComponentTitle from './component-title-with-button'
 
 
 
-const SummerSale = () => {
+const MostSale = () => {
   return (
     <div className='mt-10 px-36'>
       <ComponentTitle
-      title='Summer Sale'
-      subTitle='Special summer sale'
-      key={'summer_sale_component_title'}
+      title='2 weeks most sale'
+      subTitle='2 weeks most sale products'
+      key={'most_sale_component_title'}
       link='#'
       />
       <div className='mt-4 flex flex-wrap gap-6'>
@@ -23,4 +23,4 @@ const SummerSale = () => {
   )
 }
 
-export default SummerSale
+export default MostSale
