@@ -5,7 +5,6 @@ const ContactUs = () => {
     <div>
         <NavBar/>
         <div>
-            <NavBar/>
             <div>
                 <h1>COntact us</h1>
             </div>
