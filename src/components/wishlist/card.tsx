@@ -1,19 +1,23 @@
 
 import productImage from '../../assets/product.webp'
-import type { IProductData } from '../../types/product-types'
-
-
+import type { IProductData } from '../../types/product-types';
+import { GoTrash } from "react-icons/go";
 // define props type
 type IProps = {
-    product:IProductData
+    product: IProductData
 }
 
 
 
-const ProductCard = ({product}:IProps) => {
-    console.log(product)
+const WishlistProductCard = () => {
+    // console.log(product)
     return (
-        <div className='max-w-[300px] flex flex-col p-4 py-8 bg-[#f8f8f8] rounded-md'>
+        <div className='relative max-w-[300px] flex flex-col p-4 py-8 bg-[#f8f8f8] rounded-md'>
+
+            <div className='absolute top-4 right-4 w-fit h-fit cursor-pointer'>
+                <GoTrash size={22} className='text-red-500' />
+            </div>
+
             {/* image */}
             <div className='max-h-[180px] w-[180px]  mx-auto cursor-pointer'>
                 <img
@@ -47,13 +51,40 @@ const ProductCard = ({product}:IProps) => {
                 <button className=' bg-[#A31621] w-full p-2 rounded-md text-white text-[16px] font-[500] cursor-pointer'>
                     View Detail
                 </button>
-                <button className=' border border-[#A31621]  w-full p-2 px-1 rounded-md text-[#A31621] text-[16px] font-[500] cursor-pointer'>
-                    Add to wishlist
-                </button>
             </div>
 
         </div>
     )
 }
 
-export default ProductCard
+export default WishlistProductCard
+
+
+
+// app    store / context ={count,user}
+
+// comp A comp B .... compZ
+
+// comp A 
+// count = 1
+// user 
+
+// com B 
+
+// com c
+// .....
+
+
+// comp Z 
+
+
+// context api
+// redux 
+// mobX
+// zustland
+
+
+// user  -> context 
+//  user, token 
+// provider 
+// consumer

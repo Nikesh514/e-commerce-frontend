@@ -21,6 +21,11 @@ const CategoryList = () => {
               title='Browse Our Best Selling Product Categories'
               subTitle='Discover top-rated products by category loved by our customers.'
           />
+          { !isLoading && data?.data.length === 0 && (
+              <div className='text-center mt-10'>
+                  <p className='text-lg font-semibold'>No categories found.</p>
+              </div>
+          )}
           <div className='grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6'>
 
               {

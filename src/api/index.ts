@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://shop-cart-cmfp.onrender.com/api',
-    // timeout: 1000,
+    baseURL: import.meta.env.VITE_API_URL,
+    withCredentials: true,
   });
 
   export default instance;

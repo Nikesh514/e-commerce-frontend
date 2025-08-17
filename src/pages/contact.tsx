@@ -1,12 +1,11 @@
-import NavBar from '../components/header'
+
 
 const ContactUs = () => {
   return (
     <div>
-        <NavBar/>
         <div>
             <div>
-                <h1>COntact us</h1>
+                <h1>Contact us</h1>
             </div>
         </div>
     </div>
