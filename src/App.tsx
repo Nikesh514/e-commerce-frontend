@@ -10,6 +10,7 @@ import AboutUs from './pages/about'
 import ContactUs from './pages/contact'
 import ClientLayout from './layouts/client.layout'
 import Wishlist from './pages/wishlist'
+import ProductDetailPage from './pages/product-detail'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path='/' element={<ClientLayout/>}>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/products' element={<Products/>}/>
+          <Route path='/products/:id' element={<ProductDetailPage/>}/>
           <Route path='/about_us' element={<AboutUs/>}/>
           <Route path='/contact_us' element={<ContactUs/>}/>
           <Route path='/wish_list' element={<Wishlist/>}/>
