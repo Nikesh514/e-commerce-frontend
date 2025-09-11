@@ -8,10 +8,14 @@ import { login } from "../../../api/auth.api";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../../context/auth.context";
+import { useContext } from "react";
 
 const LoginForm = () => {
 
   const navigate = useNavigate();
+  const {setUser,setToken} = useContext(AuthContext)
+
 
   const methods = useForm({
     defaultValues: {
@@ -26,11 +30,14 @@ const LoginForm = () => {
     mutationFn: login,
     onSuccess: (data) => {
       // storage token in local storage
+      setUser(data.data.user)
+      setToken(data.data.access_token)
       localStorage.setItem('user', JSON.stringify(data.data.user))
+      localStorage.setItem('access_token', data.data.access_token) 
       // tost message ->
       toast.success(data.message ?? "Login successful")
       // redirect to home page
-      navigate('/')
+      navigate('/',{replace:true})
     },
     onError: (error) => {
       // tost message ->

@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import type { IUser } from '../types/user.types';
 
 interface IAuthContextType {
@@ -9,8 +9,10 @@ interface IAuthContextType {
     setToken:(token:string) => void
 }
 
+const defaultValues = {user:null,isLoading:true, token:null, setToken:()=>{},setUser:()=>{}}
+
 // 1. Create the context
-const AuthContext = createContext<IAuthContextType | null>(null)
+export const AuthContext = createContext<IAuthContextType>(defaultValues)
 
 // 2. Context Provider
 
@@ -19,6 +21,24 @@ export const AuthProvider = ({ children }:Readonly<{ children: React.ReactNode}>
     const [user, setUser] = useState<IUser | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [token, setToken] = useState<string | null>(null)
+
+    //use effect
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        const access_token = localStorage.getItem("access_token");
+        if (storedUser) {
+          try {
+            setUser(JSON.parse(storedUser));
+            setToken(access_token);
+          } catch (error: any) {
+            localStorage.removeItem("user");
+            localStorage.removeItem("access_token");
+            console.log("failed to parse json data", error);
+          }
+        }
+    
+        setIsLoading(false);
+      }, []);
 
     return (
         <AuthContext.Provider value={{user, isLoading, token, setUser, setToken}}>
