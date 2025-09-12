@@ -1,5 +1,5 @@
 import { BiCategory } from "react-icons/bi";
-import type { ICategoryData } from "../../../types/category-types";
+import type { ICategoryData } from "../../../types/category.types";
 
 type IProps = {
   category: ICategoryData;

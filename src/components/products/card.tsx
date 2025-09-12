@@ -1,24 +1,48 @@
 
+import { useMutation } from '@tanstack/react-query'
 import productImage from '../../assets/product.webp'
-import type { IProductData } from '../../types/product-types'
-
+import type { IProductData } from '../../types/product.types'
+import { addToWishlist } from '../../api/wishlist.api'
+import toast from 'react-hot-toast'
+import { Link } from 'react-router'
 
 // define props type
 type IProps = {
-    product:IProductData
+    product: IProductData
 }
 
 
+const ProductCard = ({ product }: IProps) => {
+    // console.log(product)
 
-const ProductCard = ({product}:IProps) => {
-    console.log(product)
+    // * mutation for add to wishlist
+    const {mutate,isPending} = useMutation({
+        mutationFn:addToWishlist,
+        mutationKey:['add_to_wishlist'],
+        onSuccess:(response) =>{
+            console.log(response)
+            toast.success(response.message)
+        },
+        onError:(error)=>{
+            toast.error(error?.message || 'Something went wrong')
+        }
+    })
+
+    const handleClick = () =>{
+        if(product){
+
+            mutate(product._id)
+        }else{
+            toast.error('This is dummy product. Can not added to wishlist')
+        }
+    }
     return (
-        <div className='max-w-[300px] flex flex-col p-4 py-8 bg-[#f8f8f8] rounded-md'>
+        <div className='w-full sm:max-w-[300px]  flex flex-col p-4 py-8 bg-[#f8f8f8] rounded-md'>
             {/* image */}
             <div className='max-h-[180px] w-[180px]  mx-auto cursor-pointer'>
                 <img
                     // cover_image
-                    src={productImage}
+                    src={product?.coverImage?.path ?? productImage}
                     alt='Product Image'
                     className='h-full w-full object-contain  hover:scale-110 transition-all duration-300 hover:grayscale-40'
                 />
@@ -28,27 +52,33 @@ const ProductCard = ({product}:IProps) => {
             <div className='mt-5'>
                 {/* product.name */}
                 <h1 className='text-[#A31621] font-bold text-[16px] line-clamp-1'>
-                    ThinkBook 16 Gen 7(16,AMD)
+                    {product?.name ?? 'ThinkBook 16 Gen 7(16,AMD)'}
                 </h1>
                 {/* product.description */}
-                <p className='text-[12px] mt-2 line-clamp-2'>16" WUXGA | Ryzen 7000 | 16GB RAM
+                <p className='text-[12px] mt-2 line-clamp-2'>
+                    {product?.description ?? `16" WUXGA | Ryzen 7000 | 16GB RAM
                     | 512GB SSD | Radeon Graphics
-                    Intel Xeon E-2336 | 32GB RAM | 1TB NVMe SSD | Remote Management
-                </p>
+                    Intel Xeon E-2336 | 32GB RAM | 1TB NVMe SSD | Remote Management`
+                    }</p>
             </div>
             <div className='flex mt-2 justify-between text-lg'>
                 {/* price */}
-                <p className='text-[14px]'>Rs.124908</p>
+                <p className='text-[14px]'>{new Intl.NumberFormat('en-NP', { style: 'currency', currency: 'NPR' }).format(product?.price ?? 12345)}</p>
                 {/* stock */}
-                <p>stock: <span className='text-green-500  text-[14px]'>5</span></p>
+                <p>stock: <span className={`${product?.stock > 5 ? 'text-green-600' : 'text-red-500'}  text-[14px]`}>{product?.stock ?? 10}</span></p>
 
             </div>
             <div className=' flex justify-between mt-5 gap-3'>
+                <Link className='w-full' to={`/product/${product?._id ?? '1'}?name=${product?.name}`}>
                 <button className=' bg-[#A31621] w-full p-2 rounded-md text-white text-[16px] font-[500] cursor-pointer'>
                     View Detail
                 </button>
-                <button className=' border border-[#A31621]  w-full p-2 px-1 rounded-md text-[#A31621] text-[16px] font-[500] cursor-pointer'>
-                    Add to wishlist
+                </Link>
+                <button 
+                disabled={isPending}
+                onClick={handleClick}
+                className=' disabled:cursor-not-allowed border border-[#A31621]  w-full p-2 px-1 rounded-md text-[#A31621] text-[16px] font-[500] cursor-pointer'>
+                    { isPending ?  "Adding to list.." : "Add to wishlist" }
                 </button>
             </div>
 

@@ -1,10 +1,8 @@
-
 import { useQuery } from "@tanstack/react-query";
 import NavBar from "../components/header";
 import { getAllProducts } from "../api/product.api";
 import ProductCard from "../components/products/card";
-import type { IProductData } from "../types/product-types";
-
+import type { IProductData } from "../types/product.types";
 
 const Products = () => {
   const { data, isLoading } = useQuery({
