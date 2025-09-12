@@ -6,15 +6,17 @@ import { useForm, FormProvider } from "react-hook-form";
 import { loginSchema } from "../../../schema/auth.schema";
 import { login } from "../../../api/auth.api";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../context/auth.context";
 import { useContext } from "react";
 
 const LoginForm = () => {
 
-  const navigate = useNavigate();
-  const {setUser,setToken} = useContext(AuthContext)
+  const { setUser, setToken } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation()
+    const from = location.state?.from?.pathname
 
 
   const methods = useForm({
@@ -37,7 +39,7 @@ const LoginForm = () => {
       // tost message ->
       toast.success(data.message ?? "Login successful")
       // redirect to home page
-      navigate('/',{replace:true})
+      navigate(from ?? '/',{replace:true})
     },
     onError: (error) => {
       // tost message ->
