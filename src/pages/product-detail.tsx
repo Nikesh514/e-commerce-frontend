@@ -3,7 +3,7 @@ import ComponentTitle from "../components/landing/component-title-with-button";
 
 const ProductDetailpage = () => {
   const {id} = useParams()
-  console.log("product id", id)
+  // console.log("product id", id)
   return (
     <main>
       <ComponentTitle
