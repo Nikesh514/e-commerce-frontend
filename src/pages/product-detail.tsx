@@ -1,16 +1,17 @@
-import { useParams } from "react-router-dom";
-import ComponentTitle from "../components/landing/component-title-with-button";
+import { useParams } from 'react-router'
+import ProductDetail from '../components/product-detail'
 
-const ProductDetailpage = () => {
+const ProductDetailPage = () => {
   const {id} = useParams()
-  // console.log("product id", id)
+  // console.log('Product id',id)
   return (
-    <main>
-      <ComponentTitle
-        title="ThinkPad X1 Carbon Gen 11"
-        subTitle="Home / Products / ThinkPad X1 Carbon Gen 11"
-      />
+    <main className='px-2 lg:px-36'>
+       
+        {/* detail components */}
+        <ProductDetail id={id ?? ''}/>
+      
     </main>
-  );
-};
-export default ProductDetailpage;
+  )
+}
+
+export default ProductDetailPage
