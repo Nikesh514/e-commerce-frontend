@@ -2,17 +2,17 @@ import heroImage from "../../assets/hero-1.webp";
 
 const Hero = () => {
   return (
-    <div id={"hero-section"} className="w-full h-[85vh] relative">
+    <div id={"hero-section"} className="w-full h-[60vh]  lg:h-[85vh] relative">
       {/* overlay */}
       <div className="bg-balck/40 absolute inset-0"></div>
-      <img src={heroImage} className="h-full w-full" />
+      <img src={heroImage} className="h-full w-full object-cover object-right md:object-none lg:object-fill" />
       {/* hero info */}
       <div className="absolute top-[30%] buttom-1/2 left-230 max-w-[600px]">
         <div>
-          <h1 className="text-4xl text-[#CCCCCC] font-bold">
+          <h1 className="text-3xl lg:text-5xl text-[#A31621] font-extrabold">
             Shop Quality. Shop Convenience. Shop Now.
           </h1>
-          <p className=" text-lg text-[#CCCCCC] ">
+          <p className=" text-[15px] md:text-lg text-[#FCF7F8] mt-2 ">
             Explore an extensive selection of premium products, thoughtfully
             chosen to fit your everyday needs. Whether you’re revamping your
             style, adding comfort to your home, or finding that special gift,
